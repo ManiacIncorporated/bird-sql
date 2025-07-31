@@ -1,0 +1,3 @@
+python src/generate.py --input_file data/test_all.jsonl --output_dir output/generations/ --num_gpus 1 --num_prompts_per_query 1 --num_samples_per_prompt 1 --num_shots 1
+python src/process_sqls.py --input_file data/test_all.jsonl --generations_dir output/generations/ --output_dir output/with_results/ --compare_against_gt --sql_timeout 40.0 --num_prompts_per_query 1
+python src/analysis_no_reward.py --results_file output/with_results/data_with_results.jsonl --gt_sql_file data/test_gold_sqls.txt --output_dir output/analysis --num_cpus 10
