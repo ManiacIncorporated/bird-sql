@@ -1,0 +1,47 @@
+2025-07-31 18:18:16,897 - INFO - Starting generation script with arguments:
+2025-07-31 18:18:16,897 - INFO -   input_file: data/test_all.jsonl
+2025-07-31 18:18:16,897 - INFO -   output_dir: output/generations/
+2025-07-31 18:18:16,897 - INFO -   few_shot_dir: few_shots
+2025-07-31 18:18:16,897 - INFO -   model: models/generator
+2025-07-31 18:18:16,897 - INFO -   system_prompt: You are a SQLite expert tasked with writing SQL for a given natural language user query. You would be given database information in form of CREATE TABLE statements; External Knowledge which are hints; user natural language query. Your task is to write valid SQLite to answer the user questions for the tables provided.
+2025-07-31 18:18:16,897 - INFO -   batch_size: 1024
+2025-07-31 18:18:16,897 - INFO -   num_samples_per_prompt: 1
+2025-07-31 18:18:16,897 - INFO -   num_prompts_per_query: 1
+2025-07-31 18:18:16,897 - INFO -   num_shots: 1
+2025-07-31 18:18:16,897 - INFO -   max_tokens: 1024
+2025-07-31 18:18:16,897 - INFO -   seed: 42
+2025-07-31 18:18:16,897 - INFO -   temperature: 1.0
+2025-07-31 18:18:16,897 - INFO -   num_gpus: 1
+2025-07-31 18:18:16,898 - INFO -   start_from_scratch: False
+2025-07-31 18:18:16,898 - INFO -   stop: [';', '<pad>', '<|endoftext|>', '</s>', '<|im_end|>']
+2025-07-31 18:18:16,898 - INFO -   num_partitions: 1
+2025-07-31 18:18:16,898 - INFO -   partition_index: 0
+2025-07-31 18:18:16,898 - INFO - Reading input data...
+2025-07-31 18:18:16,902 - INFO - Data size after partitioning: 1534 items (partition 1 of 1)
+2025-07-31 18:18:16,931 - INFO - Read 7428 few-shot examples from few_shots
+2025-07-31 18:18:16,931 - INFO - Output file path: output/generations/data_gen.jsonl
+2025-07-31 18:18:16,931 - INFO - No existing progress to resume from. Starting from scratch.
+2025-07-31 18:18:16,931 - INFO - Initializing model and tokenizer...
+2025-07-31 18:18:29,821 - DEBUG - Starting new HTTPS connection (1): stats.vllm.ai:443
+2025-07-31 18:18:29,909 - DEBUG - https://stats.vllm.ai:443 "POST / HTTP/1.1" 200 None
+2025-07-31 18:18:59,194 - INFO - Model and tokenizer initialized.
+2025-07-31 18:18:59,195 - DEBUG - Fast-forwarding random seed for 0 iterations...
+2025-07-31 18:18:59,195 - DEBUG - Done fast-forwarding random state.
+2025-07-31 18:18:59,195 - INFO - === Starting iteration 0 / 0 ===
+2025-07-31 18:18:59,195 - DEBUG - Sampled few-shot indices: 5238
+2025-07-31 18:18:59,196 - INFO - Generated 1 few-shot messages using indices 5238
+2025-07-31 18:18:59,196 - INFO - Generating batch from data index 0 to 1023...
+2025-07-31 18:18:59,196 - DEBUG - Preparing prompts for a batch of 1024 items.
+2025-07-31 18:18:59,365 - DEBUG - Running generation on the batch...
+2025-07-31 18:19:44,027 - DEBUG - Generation for this batch completed.
+2025-07-31 18:19:44,104 - INFO - Appended 1024 items to output/generations/data_gen.jsonl
+2025-07-31 18:19:44,104 - INFO - Progress saved: iteration=0, next data index=1024
+2025-07-31 18:19:44,104 - INFO - Generating batch from data index 1024 to 1533...
+2025-07-31 18:19:44,104 - DEBUG - Preparing prompts for a batch of 510 items.
+2025-07-31 18:19:44,162 - DEBUG - Running generation on the batch...
+2025-07-31 18:20:15,185 - DEBUG - Generation for this batch completed.
+2025-07-31 18:20:15,228 - INFO - Appended 510 items to output/generations/data_gen.jsonl
+2025-07-31 18:20:15,228 - INFO - Progress saved: iteration=0, next data index=1534
+2025-07-31 18:20:15,228 - INFO - Completed iteration 0
+2025-07-31 18:20:15,228 - INFO - All generations completed!
+2025-07-31 18:20:15,228 - INFO - Exiting script.

@@ -3,7 +3,13 @@ from pathlib import Path
 import orjson
 import csv
 
+from transformers import AutoTokenizer, AutoModelForCausalLM
+import torch
+import os
+import sys
+import torch.nn as nn
 
+# ------------------------------- General Utils ----------------------------------------
 def read_json_file(file):
     """this util will do the right thing depending on whether the file has the .json or the .jsonl extension"""
     suffix = Path(file).suffix[1:]
@@ -78,3 +84,29 @@ def read_tsv_file(file_path):
         for row in reader:
             data.append(row)
     return data
+
+
+# ---------------------------------------- Model Utils ----------------------------------------
+
+def get_model_from_local(model_path, device=None):
+    if device is None:
+        device = "cuda" if torch.cuda.is_available() else "cpu"
+
+    data = torch.load(model_path, map_location="cpu")  # Safely load on CPU
+    tokenizer, model = data['tokenizer'], data['model']
+
+    if "cuda" in device:
+        model = model.half()
+    else:
+        model = model.float()
+
+    model.to(device)
+    model.eval()
+
+    return model, tokenizer
+
+
+def pt_to_hf_dir(model_path, device=None, output_dir="models/generator"):
+    model, tokenizer = get_model_from_local(model_path, device)
+    model.save_pretrained(output_dir)
+    tokenizer.save_pretrained(output_dir)

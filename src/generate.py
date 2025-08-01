@@ -7,7 +7,7 @@ import numpy as np
 from transformers import AutoTokenizer
 from vllm import LLM, SamplingParams
 
-from utils import append_jsonl_file, read_json_file, read_jsonl_file
+from utils import append_jsonl_file, read_json_file, read_jsonl_file, CustomModel
 
 
 # Configure logging
@@ -128,8 +128,8 @@ def main():
     )
     parser.add_argument("--system_prompt", type=str, default="You are a SQLite expert tasked with writing SQL for a given natural language user query. You would be given database information in form of CREATE TABLE statements; External Knowledge which are hints; user natural language query. Your task is to write valid SQLite to answer the user questions for the tables provided.", required=False)
     parser.add_argument("--batch_size", type=int, default=1024, required=False)
-    parser.add_argument("--num_samples_per_prompt", type=int, default=32, required=False)
-    parser.add_argument("--num_prompts_per_query", type=int, default=32, required=False)
+    parser.add_argument("--num_samples_per_prompt", type=int, default=1, required=False)
+    parser.add_argument("--num_prompts_per_query", type=int, default=1, required=False)
     parser.add_argument("--num_shots", type=int, default=1, required=False)
     parser.add_argument("--max_tokens", type=int, default=1024, required=False)
     parser.add_argument("--seed", type=int, default=42, required=False)
@@ -208,6 +208,11 @@ def main():
     else:
         logging.info("No existing progress to resume from. Starting from scratch.")
 
+    
+    # TODO:
+    # - Figure out if the model is a dir or .pt
+    # - If .pt, unpack it in such a way that it will work with vLLM
+    
     # Initialize tokenizer & model
     logging.info("Initializing model and tokenizer...")
     tokenizer = AutoTokenizer.from_pretrained(args.model)
